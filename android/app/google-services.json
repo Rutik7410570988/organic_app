@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "529169016204",
+    "project_id": "organic-app-8d7ca",
+    "storage_bucket": "organic-app-8d7ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529169016204:android:230ceb712bac1ab9d662a9",
+        "android_client_info": {
+          "package_name": "com.rutik.sellerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529169016204-d3p02vg8uqrr018f03laoko7pgj3k4hf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCChOk9qhnTDtauqX5AeZjG5HF8esXyrXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529169016204-d3p02vg8uqrr018f03laoko7pgj3k4hf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
