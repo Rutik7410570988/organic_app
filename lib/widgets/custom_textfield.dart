@@ -6,6 +6,7 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   bool? isObscure;
   bool? enabled = true;
+  final TextInputType ;
 
   CustomTextField(
       {this.controller,
@@ -13,7 +14,8 @@ class CustomTextField extends StatelessWidget {
       this.hintText,
       this.isObscure = true,
       this.enabled,
-      Key? key})
+      this.TextInputType,
+      Key? key,})
       : super(key: key);
 
   @override

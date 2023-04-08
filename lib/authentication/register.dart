@@ -108,7 +108,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               message: "Please select an image",
             );
           });
-    } else {
+    } 
+    else 
+    {
       if (passwordController.text == confirmPasswordController.text) {
         if (confirmPasswordController.text.isNotEmpty &&
             emailController.text.isNotEmpty &&
@@ -270,13 +272,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   controller: phoneController,
                   hintText: "Phone",
                   isObscure: false,
+                  TextInputType: TextInputType.number,
                 ),
                 CustomTextField(
                   data: Icons.my_location,
                   controller: locationController,
                   hintText: "Cafe/Residential Address",
                   isObscure: false,
-                  enabled: false,
+                  // enabled: false,
                 ),
                 Container(
                   width: 400,

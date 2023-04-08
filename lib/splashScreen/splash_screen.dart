@@ -15,7 +15,7 @@ class MySplashScreen extends StatefulWidget {
 
 class _MySplashScreenState extends State<MySplashScreen> {
   startTimer() {
-    Timer(const Duration(seconds: 3), () async {
+    Timer(const Duration(seconds: 4), () async {
       if (firebaseAuth.currentUser != null) {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => const HomeScreen()));
@@ -52,7 +52,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
               const Padding(
                 padding: EdgeInsets.all(18.0),
                 child: Text(
-                  "Sell Food Online",
+                  "Sell Organic Farm Products Online",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black54,

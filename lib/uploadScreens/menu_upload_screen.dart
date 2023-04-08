@@ -33,7 +33,7 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Add New Menu",
+          "Add New Products",
           style: TextStyle(fontSize: 30, fontFamily: "Lobster"),
         ),
         flexibleSpace: Container(
@@ -80,7 +80,7 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
                   takeImage(context);
                 },
                 child: const Text(
-                  "Add New Menu",
+                  "Add New Products",
                   style: TextStyle(color: Colors.white, fontSize: 10),
                 ),
                 style: ButtonStyle(
@@ -102,7 +102,7 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
         context: context,
         builder: (context) => SimpleDialog(
               title: const Text(
-                "Menu Image",
+                "Product Image",
                 style:
                     TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
               ),
@@ -163,7 +163,7 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Uploading New Menu",
+          "Uploading New Product",
           style: TextStyle(fontSize: 20, fontFamily: "Lobster"),
         ),
         flexibleSpace: Container(
@@ -233,7 +233,7 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
                 style: const TextStyle(color: Colors.black),
                 controller: shortInfoController,
                 decoration: const InputDecoration(
-                    hintText: "Menu info",
+                    hintText: "Product info",
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none),
               ),
@@ -254,7 +254,7 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
                 style: const TextStyle(color: Colors.black),
                 controller: titleController,
                 decoration: const InputDecoration(
-                    hintText: "Menu title",
+                    hintText: "Product title",
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none),
               ),
@@ -286,14 +286,14 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
             context: context,
             builder: (builder) {
               return const ErrorDialog(
-                  message: "Please write a title or info for Menu");
+                  message: "Please write a title or info for Product");
             });
       }
     } else {
       showDialog(
           context: context,
           builder: (builder) {
-            return const ErrorDialog(message: "Please pick an image for Menu");
+            return const ErrorDialog(message: "Please pick an image for Product");
           });
     }
   }

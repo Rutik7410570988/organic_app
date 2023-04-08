@@ -27,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
             ),
             automaticallyImplyLeading: false,
             title: const Text(
-              'IFood',
+              'Organic',
               style: TextStyle(
                   fontSize: 40, color: Colors.white, fontFamily: "Lobster"),
             ),
