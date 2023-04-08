@@ -6,17 +6,19 @@ class CustomTextField extends StatelessWidget {
   final String? hintText;
   bool? isObscure;
   bool? enabled = true;
-  final TextInputType ;
+  final TextInputType;
+  final onSaved;
 
-  CustomTextField(
-      {this.controller,
-      this.data,
-      this.hintText,
-      this.isObscure = true,
-      this.enabled,
-      this.TextInputType,
-      Key? key,})
-      : super(key: key);
+  CustomTextField({
+    this.controller,
+    this.data,
+    this.hintText,
+    this.isObscure = true,
+    this.enabled,
+    this.TextInputType,
+    this.onSaved,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         obscureText: isObscure!,
         keyboardType: TextInputType,
+        onSaved: onSaved,
         cursorColor: Theme.of(context).primaryColor,
         decoration: InputDecoration(
             border: InputBorder.none,

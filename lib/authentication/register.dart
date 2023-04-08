@@ -31,6 +31,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
+  String _phonenumber ='';
+  RegExp regExp = RegExp(r'^[789]\d{9}$');
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
   String completeAddress = "";
@@ -108,36 +110,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
               message: "Please select an image",
             );
           });
-    } 
-    else 
-    {
+    } else {
       if (passwordController.text == confirmPasswordController.text) {
         if (confirmPasswordController.text.isNotEmpty &&
             emailController.text.isNotEmpty &&
             phoneController.text.isNotEmpty &&
             nameController.text.isNotEmpty &&
             locationController.text.isNotEmpty) {
-          showDialog(
-              context: context,
-              builder: (c) {
-                return const LoadingDialog(
-                  message: "Registering Acccount",
-                );
-              });
+          if (regExp.hasMatch(phoneController.text)) {
+            showDialog(
+                context: context,
+                builder: (c) {
+                  return const LoadingDialog(
+                    message: "Registering Acccount",
+                  );
+                });
 
-          String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-          fStorage.Reference reference = fStorage.FirebaseStorage.instance
-              .ref()
-              .child("sellers")
-              .child(fileName);
+            String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+            fStorage.Reference reference = fStorage.FirebaseStorage.instance
+                .ref()
+                .child("sellers")
+                .child(fileName);
 
-          fStorage.UploadTask uploadTask =
-              reference.putFile(File(imageXFile!.path));
+            fStorage.UploadTask uploadTask =
+                reference.putFile(File(imageXFile!.path));
 
-          fStorage.TaskSnapshot taskSnapshot = await uploadTask;
-          downloadUrl = await taskSnapshot.ref.getDownloadURL();
+            fStorage.TaskSnapshot taskSnapshot = await uploadTask;
+            downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
-          authenticateSellerAndSignUp();
+            authenticateSellerAndSignUp();
+          } else {
+            print(phoneController.text);
+            showDialog(
+                context: context,
+                builder: (c) {
+                  return const ErrorDialog(
+                    message: "Invalid Phone number",
+                  );
+                });
+          }
         } else {
           showDialog(
               context: context,
@@ -273,6 +284,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   hintText: "Phone",
                   isObscure: false,
                   TextInputType: TextInputType.number,
+                  onSaved: (val) => {
+                    _phonenumber = val,
+                  },
                 ),
                 CustomTextField(
                   data: Icons.my_location,
