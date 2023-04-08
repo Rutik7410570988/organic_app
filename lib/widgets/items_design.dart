@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../global/global.dart';
 import '../model/items.dart';
 
 class ItemsDesignWidget extends StatefulWidget {
@@ -14,6 +16,17 @@ class ItemsDesignWidget extends StatefulWidget {
 }
 
 class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
+  // deleteMenu(String itemId)
+  // {
+  //   FirebaseFirestore.instance.collection("sellers")
+  //       .doc(sharedPreferences!.getString("uid"))
+  //       .collection("items")
+  //       .doc(itemId)
+  //       .delete();
+
+  //   Fluttertoast.showToast(msg: "Menu Deleted Successfully.");
+  // }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -27,7 +40,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SizedBox(
-          height: 285,
+          height: 350,
           width: MediaQuery.of(context).size.width,
           child: Column(
             children: [
@@ -57,6 +70,16 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                   fontSize: 12,
                 ),
               ),
+              // IconButton(
+              //   icon: const Icon(
+              //     Icons.delete,
+              //     color: Colors.pinkAccent,
+              //   ),
+              //   onPressed: () {
+              //     delete menu
+              //     deleteMenu(widget.model!.itemID!);
+              // },
+              // ),
               Divider(
                 height: 4,
                 thickness: 3,

@@ -72,7 +72,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                   ),
                   IconButton(
                     icon: const Icon(
-                      Icons.delete_sweep,
+                      Icons.delete,
                       color: Colors.pinkAccent,
                     ),
                     onPressed: ()

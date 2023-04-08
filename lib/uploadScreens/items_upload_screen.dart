@@ -305,7 +305,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
           ),
           ListTile(
             leading: const Icon(
-              Icons.camera,
+              Icons.currency_rupee_sharp,
               color: Colors.cyan,
             ),
             title: SizedBox(

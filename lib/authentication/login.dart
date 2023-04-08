@@ -106,16 +106,25 @@ class _LoginScreenState extends State<LoginScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Image.asset(
-                "images/seller.png",
-                height: 270,
+          
+              // alignment: Alignment.bottomCenter,
+            Padding(
+              padding: EdgeInsets.only(top: 30,bottom: 20),
+              // padding: const EdgeInsets.all(20.0),
+              child: 
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: const Image(
+                  fit: BoxFit.fill,
+                  image: AssetImage(
+                    "images/seller.png",
+                  ),
+                    height: 250,
+                    width: 350,
+                ),
               ),
             ),
-          ),
+          
           Form(
             key: _formKey,
             child: Column(
