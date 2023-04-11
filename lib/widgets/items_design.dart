@@ -18,18 +18,6 @@ class ItemsDesignWidget extends StatefulWidget {
 }
 
 class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
-  deleteMenu(String itemId) {
-    FirebaseFirestore.instance
-        .collection("sellers")
-        .doc(sharedPreferences!.getString("uid"))
-        .collection("menus")
-        .doc(widget.model!.menuID)
-        .collection("items")
-        .doc(itemId)
-        .delete();
-
-    Fluttertoast.showToast(msg: "items Deleted Successfully.");
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,16 +62,16 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
               //     fontSize: 12,
               //   ),
               // ),
-              IconButton(
-                icon: const Icon(
-                  Icons.delete,
-                  color: Colors.pinkAccent,
-                ),
-                onPressed: () {
-                  // delete menu
-                  deleteMenu(widget.model!.menuID!);
-                },
-              ),
+              // IconButton(
+              //   icon: const Icon(
+              //     Icons.delete,
+              //     color: Colors.pinkAccent,
+              //   ),
+              //   onPressed: () {
+              //     // delete menu
+              //     deleteMenu(widget.model!.menuID!);
+              //   },
+              // ),
               Divider(
                 height: 4,
                 thickness: 3,

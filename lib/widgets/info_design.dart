@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../global/global.dart';
 import '../mainScreens/items_screen.dart';
+import '../splashScreen/splash_screen.dart';
 
 class InfoDesignWidget extends StatefulWidget {
   final Menus? model;
@@ -18,16 +19,24 @@ class InfoDesignWidget extends StatefulWidget {
 }
 
 class _InfoDesignWidgetState extends State<InfoDesignWidget> {
-    deleteMenu(String menuID)
-  {
-    FirebaseFirestore.instance.collection("sellers")
+  deleteMenu(String menuID) {
+    FirebaseFirestore.instance
+        .collection("sellers")
         .doc(sharedPreferences!.getString("uid"))
         .collection("menus")
         .doc(menuID)
-        .delete();
+        .delete()
+        .then((value) {
+        FirebaseFirestore.instance.collection("menus").doc(menuID).delete();
 
-    Fluttertoast.showToast(msg: "Menu Deleted Successfully.");
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const MySplashScreen()));
+        Fluttertoast.showToast(msg: "menu Deleted Successfully.");
+      });
+
+    // Fluttertoast.showToast(msg: "Menu Deleted Successfully.");
   }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -75,8 +84,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                       Icons.delete,
                       color: Colors.pinkAccent,
                     ),
-                    onPressed: ()
-                    {
+                    onPressed: () {
                       //delete menu
                       deleteMenu(widget.model!.menuID!);
                     },

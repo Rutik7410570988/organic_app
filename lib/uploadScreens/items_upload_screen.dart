@@ -240,27 +240,27 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             color: Colors.amber,
             thickness: 1,
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.perm_device_information,
-              color: Colors.cyan,
-            ),
-            title: SizedBox(
-              width: 250,
-              child: TextField(
-                style: const TextStyle(color: Colors.black),
-                controller: shortInfoController,
-                decoration: const InputDecoration(
-                    hintText: "info",
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: InputBorder.none),
-              ),
-            ),
-          ),
-          const Divider(
-            color: Colors.amber,
-            thickness: 1,
-          ),
+          // ListTile(
+          //   leading: const Icon(
+          //     Icons.perm_device_information,
+          //     color: Colors.cyan,
+          //   ),
+          //   title: SizedBox(
+          //     width: 250,
+          //     child: TextField(
+          //       style: const TextStyle(color: Colors.black),
+          //       controller: shortInfoController,
+          //       decoration: const InputDecoration(
+          //           hintText: "info",
+          //           hintStyle: TextStyle(color: Colors.grey),
+          //           border: InputBorder.none),
+          //     ),
+          //   ),
+          // ),
+          // const Divider(
+          //   color: Colors.amber,
+          //   thickness: 1,
+          // ),
           ListTile(
             leading: const Icon(
               Icons.title,
@@ -316,6 +316,27 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                     hintText: "price",
+                    hintStyle: TextStyle(color: Colors.grey),
+                    border: InputBorder.none),
+              ),
+            ),
+          ),
+          const Divider(
+            color: Colors.amber,
+            thickness: 1,
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.production_quantity_limits,
+              color: Colors.cyan,
+            ),
+            title: SizedBox(
+              width: 250,
+              child: TextField(
+                style: const TextStyle(color: Colors.black),
+                controller: shortInfoController,
+                decoration: const InputDecoration(
+                    hintText: "Quantity",
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none),
               ),
