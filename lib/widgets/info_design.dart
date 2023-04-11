@@ -52,7 +52,7 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
               ),
               Image.network(
                 widget.model!.thumbnailUrl!,
-                height: 210.0,
+                height: 200.0,
                 width: double.infinity,
                 fit: BoxFit.cover,
               ),

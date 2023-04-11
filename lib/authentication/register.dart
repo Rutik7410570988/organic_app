@@ -31,7 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
-  String _phonenumber ='';
+  String _phonenumber = '';
   RegExp regExp = RegExp(r'^[789]\d{9}$');
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
@@ -39,13 +39,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String downloadUrl = "";
   Position? position;
   List<Placemark>? placeMarks;
-  Future<void> _getImage() async {
-    imageXFile = await _picker.pickImage(source: ImageSource.gallery);
+
+  takeImage(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) => SimpleDialog(
+              title: const Text(
+                "Select Image :",
+                style:
+                    TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
+              ),
+              children: [
+                SimpleDialogOption(
+                  child: const Text(
+                    "Capture Image with Camera",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  onPressed: captureImageWithCamera,
+                ),
+                SimpleDialogOption(
+                  child: const Text(
+                    "Select From Gallery",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  onPressed: (() async {
+                    Navigator.pop(context);
+                    imageXFile =
+                        await _picker.pickImage(source: ImageSource.gallery);
+                    setState(() {
+                      imageXFile;
+                    });
+                  }),
+                ),
+                SimpleDialogOption(
+                  child: const Text(
+                    "Cancel",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ));
+  }
+
+  Future<void> captureImageWithCamera() async {
+    Navigator.pop(context);
+    imageXFile = await _picker.pickImage(source: ImageSource.camera);
 
     setState(() {
       imageXFile;
     });
   }
+
+  // Future<void> pickImageFromGallery() async {
+  //   imageXFile = await _picker.pickImage(source: ImageSource.gallery);
+
+  //   setState(() {
+  //     imageXFile;
+  //   });
+  // }
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
@@ -134,13 +186,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
             fStorage.UploadTask uploadTask =
                 reference.putFile(File(imageXFile!.path));
-
-            fStorage.TaskSnapshot taskSnapshot = await uploadTask;
+            fStorage.TaskSnapshot taskSnapshot =
+                await uploadTask.whenComplete(() => {});
             downloadUrl = await taskSnapshot.ref.getDownloadURL();
 
             authenticateSellerAndSignUp();
           } else {
-            print(phoneController.text);
             showDialog(
                 context: context,
                 builder: (c) {
@@ -200,18 +251,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Future saveDataToFirestore(User currentUser) async {
-    FirebaseFirestore.instance.collection("sellers").doc(currentUser.uid).set({
-      "sellerUID": currentUser.uid,
-      "sellerEmail": currentUser.email,
-      "sellerName": nameController.text.trim().toString(),
-      "sellerAvatarUrl": downloadUrl,
-      "phone": phoneController.text.trim().toString(),
-      "address": completeAddress,
-      "status": "approved",
-      "earnings": 0.0,
-      "lat": position!.latitude,
-      "lng": position!.longitude
-    });
+    FirebaseFirestore.instance.collection("sellers").doc(currentUser.uid).set(
+      {
+        "sellerUID": currentUser.uid,
+        "sellerEmail": currentUser.email,
+        "sellerName": nameController.text.trim().toString(),
+        "sellerAvatarUrl": downloadUrl,
+        "phone": phoneController.text.trim().toString(),
+        "address": completeAddress,
+        "status": "approved",
+        "earnings": 0.0,
+        "lat": position!.latitude,
+        "lng": position!.longitude
+      },
+    );
 
     // save data locally
 
@@ -233,7 +286,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           GestureDetector(
             onTap: () {
-              _getImage();
+              takeImage(context);
             },
             child: CircleAvatar(
                 radius: MediaQuery.of(context).size.width * 0.2,

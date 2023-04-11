@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -156,6 +157,8 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
       imageXFile;
       shortInfoController.clear();
       titleController.clear();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (builder) => const HomeScreen()));
     });
   }
 
@@ -293,7 +296,8 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
       showDialog(
           context: context,
           builder: (builder) {
-            return const ErrorDialog(message: "Please pick an image for Product");
+            return const ErrorDialog(
+                message: "Please pick an image for Product");
           });
     }
   }
@@ -324,12 +328,24 @@ class _MenuUploadScreenState extends State<MenuUploadScreen> {
       "publishedDate": DateTime.now(),
       "status": "available",
       "thumbnailUrl": downloadUrl
-    });
-    clearMenusUploadForm();
+    }).then((value) {
+      final menuRef = FirebaseFirestore.instance.collection("menus");
 
-    setState(() {
-      uniqueIdName = DateTime.now().millisecondsSinceEpoch.toString();
-      uploading = false;
+      menuRef.doc(uniqueIdName).set({
+        "menuID": uniqueIdName,
+        "sellerUID": sharedPreferences!.getString("uid"),
+        "menuTitle": titleController.text.toString(),
+        "menuInfo": shortInfoController.text.toString(),
+        "publishedDate": DateTime.now(),
+        "status": "available",
+        "thumbnailUrl": downloadUrl
+      });
+      clearMenusUploadForm();
+
+      setState(() {
+        uniqueIdName = DateTime.now().millisecondsSinceEpoch.toString();
+        uploading = false;
+      });
     });
   }
 }

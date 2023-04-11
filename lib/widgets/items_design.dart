@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../global/global.dart';
+import '../mainScreens/item_detail_screen.dart';
 import '../model/items.dart';
+import '../model/menus.dart';
 
 class ItemsDesignWidget extends StatefulWidget {
   final Items? model;
@@ -16,25 +18,27 @@ class ItemsDesignWidget extends StatefulWidget {
 }
 
 class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
-  // deleteMenu(String itemId)
-  // {
-  //   FirebaseFirestore.instance.collection("sellers")
-  //       .doc(sharedPreferences!.getString("uid"))
-  //       .collection("items")
-  //       .doc(itemId)
-  //       .delete();
+  deleteMenu(String itemId) {
+    FirebaseFirestore.instance
+        .collection("sellers")
+        .doc(sharedPreferences!.getString("uid"))
+        .collection("menus")
+        .doc(widget.model!.menuID)
+        .collection("items")
+        .doc(itemId)
+        .delete();
 
-  //   Fluttertoast.showToast(msg: "Menu Deleted Successfully.");
-  // }
+    Fluttertoast.showToast(msg: "items Deleted Successfully.");
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => ItemsScreen(model: widget.model!)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ItemDetailsScreen(model: widget.model!)));
       },
       splashColor: Colors.amber,
       child: Padding(
@@ -63,23 +67,23 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
                 style: const TextStyle(
                     color: Colors.cyan, fontSize: 20, fontFamily: "Train"),
               ),
-              Text(
-                widget.model!.shortInfo!,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
-              ),
-              // IconButton(
-              //   icon: const Icon(
-              //     Icons.delete,
-              //     color: Colors.pinkAccent,
+              // Text(
+              //   widget.model!.shortInfo!,
+              //   style: const TextStyle(
+              //     color: Colors.grey,
+              //     fontSize: 12,
               //   ),
-              //   onPressed: () {
-              //     delete menu
-              //     deleteMenu(widget.model!.itemID!);
-              // },
               // ),
+              IconButton(
+                icon: const Icon(
+                  Icons.delete,
+                  color: Colors.pinkAccent,
+                ),
+                onPressed: () {
+                  // delete menu
+                  deleteMenu(widget.model!.menuID!);
+                },
+              ),
               Divider(
                 height: 4,
                 thickness: 3,

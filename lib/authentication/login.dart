@@ -22,17 +22,27 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   void formValidation() {
-    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      loginNow();
+    if (emailController.text.isNotEmpty) {
+      if (passwordController.text.isNotEmpty) {
+        loginNow();
+      } else {
+        showDialog(
+            context: context,
+            builder: (c) {
+              return const ErrorDialog(
+                message: "Please write password",
+              );
+            });
+      }
     } else {
-      showDialog(
-          context: context,
-          builder: (c) {
-            return const ErrorDialog(
-              message: "Please write email or password",
-            );
-          });
-    }
+        showDialog(
+            context: context,
+            builder: (c) {
+              return const ErrorDialog(
+                message: "Please write email",
+              );
+            });
+      }
   }
 
   loginNow() async {
@@ -143,7 +153,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    loginNow();
+                    formValidation();
                   },
                   child: const Text(
                     'Login',

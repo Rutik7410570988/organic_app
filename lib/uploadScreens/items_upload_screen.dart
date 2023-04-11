@@ -118,7 +118,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
         context: context,
         builder: (context) => SimpleDialog(
               title: const Text(
-                "Menu Image",
+                "Items Image",
                 style:
                     TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
               ),
